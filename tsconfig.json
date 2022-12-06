@@ -1,0 +1,27 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: cain
+ * @Date: 2022-12-06 17:23:19
+ * @LastEditors: Andy
+ * @LastEditTime: 2022-12-06 17:27:59
+ * @FilePath: \cain-video\tsconfig.json
+ */
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "vite-env.d.ts", "main.ts", "App.vue.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
