@@ -1,15 +1,15 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: cain
  * @Date: 2022-12-06 17:51:28
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-06 17:51:56
+ * @LastEditTime: 2022-12-07 08:52:03
  * @FilePath: \cain-video\env.d.ts
  */
-declare module '*.vue' {
-    import type { DefineComponent } from 'vue'
-    const component: DefineComponent<{}, {}, any>
-    export default component
-  }
-  
+declare module "*.vue" {
+  import type { DefineComponent } from "vue";
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
+}
+
