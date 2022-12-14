@@ -1,8 +1,50 @@
 .videoPlay {
-    position: relative;
-    .video {
-      object-fit: fill;
-      position: relative;
-    }
+  position: relative;
+  box-sizing: border-box;
 
+  .video {
+    object-fit: fill;
+    position: relative;
   }
+
+  .playBtn {
+    position: absolute;
+    right: 20px;
+    bottom: 70px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+
+}
+
+.isWebFullScreen {
+  position: fixed !important;
+  width: 100vw !important;
+  height: 100vh !important;
+
+  .video {
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+}
+
+.videoBox {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.isHover {
+  opacity: 1 !important;
+}
+
+.Appbar-enter-active,
+.Appbar-leave-active {
+  transition: all .6s;
+}
+
+.Appbar-enter,
+.Appbar-leave-to {
+  opacity: 0;
+}
