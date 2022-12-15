@@ -4,10 +4,12 @@
  * @Author: cain
  * @Date: 2022-12-13 17:01:09
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-14 17:14:18
+ * @LastEditTime: 2022-12-15 15:40:42
  * @FilePath: \cain-video\video\appbar\utils.ts
  */
 import {
+  isbrowserFullScreen,
+  isPicture,
   isPlay,
   isWebFullScreen,
   m3u8_video,
@@ -17,6 +19,7 @@ import { reactive, ref } from "vue";
 
 const progress = ref<HTMLDivElement>();
 const propressbuffer = ref<HTMLDivElement>();
+const line_btn = ref<HTMLDivElement>();
 export const propressState = reactive<{
   ProgWidth: number;
   BufferWidth: number;
@@ -38,20 +41,35 @@ export const propressState = reactive<{
  */
 export const AppBarLoad = (
   progressRef: HTMLDivElement,
-  propressbufferRef: HTMLDivElement
+  propressbufferRef: HTMLDivElement,
+  line_btnRef: HTMLDivElement
 ) => {
   progress.value = progressRef;
   propressbuffer.value = propressbufferRef;
+  line_btn.value = line_btnRef;
   // 拿到宽度并计算
   propressState.ProgWidth = progress.value.clientWidth;
-  console.log(progress.value);
   propressState.BufferWidth = propressbuffer.value.offsetWidth;
+
+  TimerStart();
+  setTimeout(() => {
+    clearInterval(propressState.timer);
+  }, 100);
+};
+
+/**
+ * @name: 定时任务
+ * @msg:
+ * @return {*}
+ */
+export const TimerStart = () => {
   propressState.timer = setInterval(() => {
     propressState.duration = m3u8_video.value?.duration;
     propressState.current = m3u8_video.value?.currentTime;
     let sum =
       (Number(propressState.current) / Number(propressState.duration)) * 100;
     (propressbuffer.value as any).style.width = sum + "%";
+    (line_btn.value as any).style.left = sum + "%";
   }, 1);
 };
 
@@ -101,8 +119,62 @@ export const TimeParse = (time: number | undefined) => {
   return str;
 };
 
+/**
+ * @name: 网页全屏事件
+ * @msg:
+ * @return {*}
+ */
 export const WebFullScreen = () => {
   isWebFullScreen.value = !isWebFullScreen.value;
+};
+
+/**
+ * @name: 浏览器全屏事件
+ * @msg:
+ * @return {*}
+ */
+export const browserFullScreen = () => {
+  try {
+    const element: any = document.documentElement;
+    const doc: any = document;
+    if (isbrowserFullScreen.value) {
+      if (doc.exitFullscreen) {
+        doc.exitFullscreen();
+      } else if (doc.webkitCancelFullScreen) {
+        doc.webkitCancelFullScreen();
+      } else if (doc.mozCancelFullScreen) {
+        doc.mozCancelFullScreen();
+      } else if (doc.msExitFullscreen) {
+        doc.msExitFullscreen();
+      }
+    } else {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullScreen) {
+        element.webkitRequestFullScreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    }
+    isWebFullScreen.value = !isWebFullScreen.value;
+    isbrowserFullScreen.value = !isbrowserFullScreen.value;
+  } catch (err) {}
+};
+
+/**
+ * @name: 画中画事件
+ * @msg:
+ * @return {*}
+ */
+export const picturein = () => {
+  if (isPicture.value) {
+    document.exitPictureInPicture();
+  } else {
+    m3u8_video.value?.requestPictureInPicture();
+  }
+  isPicture.value = !isPicture.value;
 };
 
 /**
@@ -111,10 +183,25 @@ export const WebFullScreen = () => {
  * @return {*}
  */
 
-export const TimerProg = (el) => {
+export const TimerProg = (el:any) => {
   let offWidthsum = progress.value?.clientWidth;
+  let xx = (Number(line_btn.value?.clientWidth) * 0.5) / 500;
   let offwidth = Math.ceil((el.clientX / Number(offWidthsum)) * 100) / 100;
-  let x = Number(propressState.duration) * (offwidth - 0.01);
+  let x = Number(propressState.duration) * (offwidth - xx);
   (m3u8_video.value as any).currentTime = x;
   m3u8_video.value?.play();
 };
+
+/**
+ * @name: 移入进度条
+ * @msg:
+ * @return {*}
+ */
+export const PropMousemove = () => {};
+
+/**
+ * @name: 移出进度条
+ * @msg:
+ * @return {*}
+ */
+export const PropMouseout = () => {};

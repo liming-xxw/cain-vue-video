@@ -4,10 +4,13 @@
  * @Author: cain
  * @Date: 2022-12-06 17:23:19
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-14 14:11:47
+ * @LastEditTime: 2022-12-15 14:10:41
  * @FilePath: \cain-video\App.vue
 -->
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+
+</script>
 
 <template>
   <div>

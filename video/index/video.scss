@@ -1,6 +1,7 @@
 .videoPlay {
   position: relative;
   box-sizing: border-box;
+  background-color: black;
 
   .video {
     object-fit: fill;
@@ -30,10 +31,7 @@
   }
 }
 
-.videoBox {
-  display: inline-block;
-  box-sizing: border-box;
-}
+
 
 .isHover {
   opacity: 1 !important;

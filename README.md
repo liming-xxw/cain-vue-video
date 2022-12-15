@@ -1,16 +1,35 @@
-# Vue 3 + TypeScript + Vite
+<div align="center">
+  <a href="https://varlet-varletjs.vercel.app">
+    <img src="http://caintest.oss-cn-hangzhou.aliyuncs.com/dedf85d368255fb637e9d2464a3a15e7.png" width="150">
+  </a>
+  <h1>Cain-video</h1>
+  <p>基于 Vue3 的 video 插件</p>
+   <br />
+  <p>
+    <img src="https://img.shields.io/npm/v/@varlet/ui?style=flat-square" alt="version">
+    <img src="https://img.shields.io/github/stars/varletjs/varlet" alt="stars">
+    <img src="https://img.shields.io/badge/vue-v3.2.0%2B-%23407fbc" alt="vue">
+    <img src="https://img.shields.io/npm/l/@varlet/ui.svg" alt="licence">
+    <img src="https://img.shields.io/codecov/c/github/varletjs/varlet" alt="coverage">
+    <img src="https://img.badgesize.io/https://unpkg.com/@varlet/ui/umd/varlet.js?compression=gzip&label=gzip" alt="gzip" />
+    <img src="https://github.com/varletjs/varlet/workflows/CI/badge.svg" alt="ci">
+  </p>
+</div>
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+------
 
-## Recommended IDE Setup
+## 介绍
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+cain-video 一款基于vue3制作的video视频播放插件，ui美观，功能丰富，高度集成，持续更新
 
-## Type Support For `.vue` Imports in TS
+## 现有功能
+------
+1. 实现进度条功能
+2. 实现画中画功能
+3. 实现网页全屏
+4. 实现浏览器全屏
+5. 实现播放暂停
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
-
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
-
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+## 近期更新 v1.0-bate 
+------
+暂时内测无上线

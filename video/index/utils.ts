@@ -4,10 +4,11 @@
  * @Author: cain
  * @Date: 2022-12-06 17:42:30
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-14 17:30:13
+ * @LastEditTime: 2022-12-15 15:03:49
  * @FilePath: \cain-video\video\index\utils.ts
  */
 import { ref, nextTick, reactive, toRefs } from "vue";
+import { propressState, TimerStart } from "../appbar/utils";
 
 export interface VideoOption {
   autoplay: boolean;
@@ -25,10 +26,16 @@ export const useState = reactive<{
   isPlay: boolean;
   isWebFullScreen: boolean;
   isHover: boolean;
+  isProgHover: boolean;
+  isbrowserFullScreen: boolean;
+  isPicture: boolean;
 }>({
   isPlay: true,
   isWebFullScreen: false,
   isHover: false,
+  isProgHover: false,
+  isbrowserFullScreen: false,
+  isPicture: false,
 });
 
 // 配置变量
@@ -41,14 +48,30 @@ export const VideoOptionState = reactive<VideoOption>({
   height: "500px",
   current: 0,
 });
-export const { isPlay, isWebFullScreen, isHover } = toRefs(useState);
+export const {
+  isPlay,
+  isWebFullScreen,
+  isHover,
+  isProgHover,
+  isbrowserFullScreen,
+  isPicture
+} = toRefs(useState);
 
-export const VideoLoad = (ref: HTMLVideoElement, option: VideoOption) => {
+export const VideoLoad = async (ref: HTMLVideoElement, option: VideoOption) => {
   // 配置选项
   ObjKeys(VideoOptionState, option);
   m3u8_video.value = ref;
   // 绑定键盘事件
   document.addEventListener("keydown", VideoSuspend);
+  document.addEventListener("resize", VideoResize);
+  window.addEventListener("resize", VideoResize);
+};
+
+export const VideoResize = () => {
+  if (isbrowserFullScreen.value) {
+    // isWebFullScreen.value = false;
+  }
+  // isbrowserFullScreen.value = !isbrowserFullScreen.value
 };
 
 /**
@@ -95,6 +118,17 @@ export const VideoEnded = () => {
 
 export const VideoPlaying = () => {
   isPlay.value = false;
+  TimerStart();
+};
+
+/**
+ * @name: 视频暂停
+ * @msg:
+ * @return {*}
+ */
+export const VideoPause = () => {
+  clearInterval(propressState.timer);
+  console.log("视频暂停中");
 };
 
 /**

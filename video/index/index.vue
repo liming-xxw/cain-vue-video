@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-06 17:42:11
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-14 17:27:29
+ * @LastEditTime: 2022-12-15 15:25:20
  * @FilePath: \cain-video\video\index\index.vue
 -->
 <script lang="ts" setup>
@@ -18,7 +18,9 @@ import {
   isHover,
   VideoMouseover,
   VideoMouseout,
-VideoClick,
+  VideoClick,
+  VideoPause,
+  isPicture,
 } from "./utils";
 import { onMounted, toRefs, ref } from "vue";
 import { IconPlay } from "../appbar/utils";
@@ -71,11 +73,12 @@ defineOptions({
 </script>
 
 <template>
-  <div id="videoBox">
+  <div id="videoBox" :style="{ width: width, height: height }">
     <div
       class="videoPlay"
       :class="{ isWebFullScreen: isWebFullScreen }"
       :style="{ width: width, height: height }"
+  
     >
       <video
         ref="m3u8_video"
@@ -88,13 +91,12 @@ defineOptions({
         @playing="VideoPlaying"
         @mousemove="VideoMouseover"
         @mouseout="VideoMouseout"
+        @pause="VideoPause"
       ></video>
       <!-- <Transition name="Appbar"> -->
       <Appbar
         :class="{ isHover: isHover }"
         style="opacity: 0; transition: 0.6s"
-        @mousemove="VideoMouseover"
-        @mouseout="isHover = false"
       />
       <!-- </Transition> -->
 
