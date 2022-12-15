@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-06 17:42:11
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 15:25:20
+ * @LastEditTime: 2022-12-15 18:23:55
  * @FilePath: \cain-video\video\index\index.vue
 -->
 <script lang="ts" setup>
@@ -61,7 +61,6 @@ const option: VideoOption = {
   width: width.value,
   height: height.value,
 };
-
 onMounted(() => {
   VideoLoad(m3u8_video.value, option);
 });
@@ -73,12 +72,18 @@ defineOptions({
 </script>
 
 <template>
+  {{ isHover }}
   <div id="videoBox" :style="{ width: width, height: height }">
+    <div
+      class="video_mock"
+      
+      @mousemove="VideoMouseover"
+      @mouseout="isHover = false"
+    ></div>
     <div
       class="videoPlay"
       :class="{ isWebFullScreen: isWebFullScreen }"
       :style="{ width: width, height: height }"
-  
     >
       <video
         ref="m3u8_video"
@@ -89,18 +94,11 @@ defineOptions({
         @click="VideoClick"
         @ended="VideoEnded"
         @playing="VideoPlaying"
-        @mousemove="VideoMouseover"
-        @mouseout="VideoMouseout"
+
         @pause="VideoPause"
       ></video>
-      <!-- <Transition name="Appbar"> -->
-      <Appbar
-        :class="{ isHover: isHover }"
-        style="opacity: 0; transition: 0.6s"
-      />
-      <!-- </Transition> -->
+      <Appbar />
 
-      <!-- <div class="playBtn"> -->
       <svg
         v-show="isPlay"
         class="font playBtn"

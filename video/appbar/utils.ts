@@ -4,11 +4,12 @@
  * @Author: cain
  * @Date: 2022-12-13 17:01:09
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 15:40:42
+ * @LastEditTime: 2022-12-15 18:18:18
  * @FilePath: \cain-video\video\appbar\utils.ts
  */
 import {
   isbrowserFullScreen,
+  isHover,
   isPicture,
   isPlay,
   isWebFullScreen,
@@ -183,13 +184,14 @@ export const picturein = () => {
  * @return {*}
  */
 
-export const TimerProg = (el:any) => {
+export const TimerProg = (el: any) => {
   let offWidthsum = progress.value?.clientWidth;
   let xx = (Number(line_btn.value?.clientWidth) * 0.5) / 500;
   let offwidth = Math.ceil((el.clientX / Number(offWidthsum)) * 100) / 100;
   let x = Number(propressState.duration) * (offwidth - xx);
   (m3u8_video.value as any).currentTime = x;
   m3u8_video.value?.play();
+  isHover.value = true;
 };
 
 /**

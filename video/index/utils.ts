@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-06 17:42:30
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 15:03:49
+ * @LastEditTime: 2022-12-15 18:30:45
  * @FilePath: \cain-video\video\index\utils.ts
  */
 import { ref, nextTick, reactive, toRefs } from "vue";
@@ -54,7 +54,7 @@ export const {
   isHover,
   isProgHover,
   isbrowserFullScreen,
-  isPicture
+  isPicture,
 } = toRefs(useState);
 
 export const VideoLoad = async (ref: HTMLVideoElement, option: VideoOption) => {

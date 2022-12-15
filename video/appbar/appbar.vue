@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-13 17:01:00
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 15:07:42
+ * @LastEditTime: 2022-12-15 18:23:48
  * @FilePath: \cain-video\video\appbar\appbar.vue
 -->
 <script lang="ts" setup>
@@ -32,7 +32,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="appbar" @mousemove="VideoMouseover" @mouseout="isHover = false">
+  <div
+    class="appbar"
+    :class="{ isHover: isHover }"
+    style="opacity: 0; transition: 0.6s"
+  
+  >
     <div class="utilsClass">
       <div class="line" :class="{ isHoverProg: isProgHover }">
         <div
