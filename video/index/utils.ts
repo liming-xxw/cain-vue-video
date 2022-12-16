@@ -3,12 +3,12 @@
  * @version:
  * @Author: cain
  * @Date: 2022-12-06 17:42:30
- * @LastEditors: 黎明 3111345436@qq.com
- * @LastEditTime: 2022-12-15 21:42:18
+ * @LastEditors: Andy
+ * @LastEditTime: 2022-12-16 15:54:31
  * @FilePath: \cain-video\video\index\utils.ts
  */
 import { ref, nextTick, reactive, toRefs } from "vue";
-import { propressState, TimerStart } from "../appbar/utils";
+import { anxia, propressState, TimerStart } from "../appbar/utils";
 
 export interface VideoOption {
   autoplay: boolean;
@@ -153,6 +153,7 @@ export const VideoClick = () => {
 export const VideoMouseover = () => {
   isHover.value = true;
   isProgHover.value = false;
+  anxia.value = false;
 };
 
 /**

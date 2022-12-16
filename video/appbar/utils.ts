@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-13 17:01:09
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 18:18:18
+ * @LastEditTime: 2022-12-16 16:54:17
  * @FilePath: \cain-video\video\appbar\utils.ts
  */
 import {
@@ -12,11 +12,15 @@ import {
   isHover,
   isPicture,
   isPlay,
+  isProgHover,
   isWebFullScreen,
   m3u8_video,
   VideoOptionState,
 } from "../index/utils";
 import { reactive, ref } from "vue";
+
+// 局部变量
+export const anxia = ref<boolean>(false);
 
 const progress = ref<HTMLDivElement>();
 const propressbuffer = ref<HTMLDivElement>();
@@ -51,7 +55,8 @@ export const AppBarLoad = (
   // 拿到宽度并计算
   propressState.ProgWidth = progress.value.clientWidth;
   propressState.BufferWidth = propressbuffer.value.offsetWidth;
-
+  propressState.duration = m3u8_video.value?.duration;
+    propressState.current = m3u8_video.value?.currentTime;
   TimerStart();
   setTimeout(() => {
     clearInterval(propressState.timer);
@@ -199,7 +204,33 @@ export const TimerProg = (el: any) => {
  * @msg:
  * @return {*}
  */
-export const PropMousemove = () => {};
+export const ProgMousemove = (el) => {
+  isProgHover.value = true;
+  if (anxia.value) {
+    TimerProg(el);
+  }
+};
+
+/**
+ * @name: 在进度条按下事件
+ * @msg:
+ * @return {*}
+ */
+export const ProgMousedown = (el: any) => {
+  TimerProg(el);
+
+  anxia.value = true;
+};
+
+/**
+ * @name: 在进度条松开事件
+ * @msg:
+ * @param {any} el
+ * @return {*}
+ */
+export const ProgMouseup = (el: any) => {
+  anxia.value = false;
+};
 
 /**
  * @name: 移出进度条
