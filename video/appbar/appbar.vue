@@ -3,8 +3,8 @@
  * @version: 
  * @Author: cain
  * @Date: 2022-12-13 17:01:00
- * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 18:23:48
+ * @LastEditors: 黎明 3111345436@qq.com
+ * @LastEditTime: 2022-12-15 23:20:12
  * @FilePath: \cain-video\video\appbar\appbar.vue
 -->
 <script lang="ts" setup>
@@ -36,41 +36,32 @@ onMounted(() => {
     class="appbar"
     :class="{ isHover: isHover }"
     style="opacity: 0; transition: 0.6s"
-  
+    @mousemove.stop="isHover = true"
   >
     <div class="utilsClass">
       <div class="line" :class="{ isHoverProg: isProgHover }">
         <div
           class="progressbar"
-          @mousemove="PropMousemove"
-          @mouseout="PropMouseout"
+          @mousemove.stop="isProgHover = true"
           ref="progressRef"
           @click="TimerProg"
         >
           <div class="progress-linear__buffer" ref="propressbufferRef"></div>
         </div>
-        <!-- <svg
-       
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A4,4 0 0,1 8,16A4,4 0 0,1 12,12A4,4 0 0,0 16,8A4,4 0 0,0 12,4M12,6.5A1.5,1.5 0 0,1 13.5,8A1.5,1.5 0 0,1 12,9.5A1.5,1.5 0 0,1 10.5,8A1.5,1.5 0 0,1 12,6.5M12,14.5A1.5,1.5 0 0,0 10.5,16A1.5,1.5 0 0,0 12,17.5A1.5,1.5 0 0,0 13.5,16A1.5,1.5 0 0,0 12,14.5Z"
-          />
-        </svg> -->
         <svg
           ref="line_btnRef"
           class="fnot line_btn"
           fill="white"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
+          @mousemove="VideoMouseover, (isProgHover = true)"
         >
           <path
             d="M12,2C14.65,2 17.19,3.06 19.07,4.93L17.65,6.35C16.15,4.85 14.12,4 12,4C9.88,4 7.84,4.84 6.35,6.35L4.93,4.93C6.81,3.06 9.35,2 12,2M3.66,6.5L5.11,7.94C4.39,9.17 4,10.57 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,10.57 19.61,9.17 18.88,7.94L20.34,6.5C21.42,8.12 22,10.04 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12C2,10.04 2.58,8.12 3.66,6.5M12,6A6,6 0 0,1 18,12C18,13.59 17.37,15.12 16.24,16.24L14.83,14.83C14.08,15.58 13.06,16 12,16C10.94,16 9.92,15.58 9.17,14.83L7.76,16.24C6.63,15.12 6,13.59 6,12A6,6 0 0,1 12,6M12,8A1,1 0 0,0 11,9A1,1 0 0,0 12,10A1,1 0 0,0 13,9A1,1 0 0,0 12,8Z"
           />
         </svg>
       </div>
-      <div class="toolbar">
+      <div class="toolbar" @mousemove="isProgHover = false">
         <div class="toolbar_left">
           <div class="toolbar_play">
             <svg

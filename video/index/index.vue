@@ -3,8 +3,8 @@
  * @version: 
  * @Author: cain
  * @Date: 2022-12-06 17:42:11
- * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 18:23:55
+ * @LastEditors: 黎明 3111345436@qq.com
+ * @LastEditTime: 2022-12-15 23:51:06
  * @FilePath: \cain-video\video\index\index.vue
 -->
 <script lang="ts" setup>
@@ -72,14 +72,7 @@ defineOptions({
 </script>
 
 <template>
-  {{ isHover }}
   <div id="videoBox" :style="{ width: width, height: height }">
-    <div
-      class="video_mock"
-      
-      @mousemove="VideoMouseover"
-      @mouseout="isHover = false"
-    ></div>
     <div
       class="videoPlay"
       :class="{ isWebFullScreen: isWebFullScreen }"
@@ -94,7 +87,8 @@ defineOptions({
         @click="VideoClick"
         @ended="VideoEnded"
         @playing="VideoPlaying"
-
+        @mousemove.stop="VideoMouseover"
+        @mouseout="isHover = false"
         @pause="VideoPause"
       ></video>
       <Appbar />

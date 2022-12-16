@@ -3,8 +3,8 @@
  * @version:
  * @Author: cain
  * @Date: 2022-12-06 17:42:30
- * @LastEditors: Andy
- * @LastEditTime: 2022-12-15 18:30:45
+ * @LastEditors: 黎明 3111345436@qq.com
+ * @LastEditTime: 2022-12-15 21:42:18
  * @FilePath: \cain-video\video\index\utils.ts
  */
 import { ref, nextTick, reactive, toRefs } from "vue";
@@ -152,6 +152,7 @@ export const VideoClick = () => {
  */
 export const VideoMouseover = () => {
   isHover.value = true;
+  isProgHover.value = false;
 };
 
 /**
