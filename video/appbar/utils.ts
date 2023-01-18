@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-13 17:01:09
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-16 16:54:17
+ * @LastEditTime: 2023-01-18 11:48:30
  * @FilePath: \cain-video\video\appbar\utils.ts
  */
 import {
@@ -14,6 +14,7 @@ import {
   isPlay,
   isProgHover,
   isWebFullScreen,
+  isWebIconFlag,
   m3u8_video,
   VideoOptionState,
 } from "../index/utils";
@@ -56,7 +57,7 @@ export const AppBarLoad = (
   propressState.ProgWidth = progress.value.clientWidth;
   propressState.BufferWidth = propressbuffer.value.offsetWidth;
   propressState.duration = m3u8_video.value?.duration;
-    propressState.current = m3u8_video.value?.currentTime;
+  propressState.current = m3u8_video.value?.currentTime;
   TimerStart();
   setTimeout(() => {
     clearInterval(propressState.timer);
@@ -132,6 +133,7 @@ export const TimeParse = (time: number | undefined) => {
  */
 export const WebFullScreen = () => {
   isWebFullScreen.value = !isWebFullScreen.value;
+  console.log(isWebFullScreen.value);
 };
 
 /**
@@ -143,7 +145,10 @@ export const browserFullScreen = () => {
   try {
     const element: any = document.documentElement;
     const doc: any = document;
-    if (isbrowserFullScreen.value) {
+    isbrowserFullScreen.value = !isbrowserFullScreen.value;
+    if (!isbrowserFullScreen.value) {
+      isWebFullScreen.value = false;
+      isWebIconFlag.value = true;
       if (doc.exitFullscreen) {
         doc.exitFullscreen();
       } else if (doc.webkitCancelFullScreen) {
@@ -154,6 +159,8 @@ export const browserFullScreen = () => {
         doc.msExitFullscreen();
       }
     } else {
+      isWebFullScreen.value = true;
+      isWebIconFlag.value = false;
       if (element.requestFullscreen) {
         element.requestFullscreen();
       } else if (element.webkitRequestFullScreen) {
@@ -164,8 +171,6 @@ export const browserFullScreen = () => {
         element.msRequestFullscreen();
       }
     }
-    isWebFullScreen.value = !isWebFullScreen.value;
-    isbrowserFullScreen.value = !isbrowserFullScreen.value;
   } catch (err) {}
 };
 

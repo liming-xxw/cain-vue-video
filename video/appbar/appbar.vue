@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-13 17:01:00
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-16 17:35:11
+ * @LastEditTime: 2023-01-18 11:47:22
  * @FilePath: \cain-video\video\appbar\appbar.vue
 -->
 <script lang="ts" setup>
@@ -26,7 +26,7 @@ import {
   ProgMouseup,
   anxia,
 } from "./utils";
-import { isHover, isPlay, isProgHover, VideoMouseover } from "../index/utils";
+import { isHover, isPlay, isProgHover, isWebIconFlag, VideoMouseover} from "../index/utils";
 const progressRef = ref();
 const propressbufferRef = ref();
 const line_btnRef = ref();
@@ -120,11 +120,18 @@ onMounted(() => {
         <div class="toolbar_right">
           <div class="toolbar_right_list">
             <div class="appBarText">倍速</div>
-            <TagHover>
+            <TagHover :top="-100" :left="-5">
               <template #tag>
-                <div class="videovoice"></div>
+                <div class="videovoice">
+                  <div class="videovoiceNumber">100</div>
+                  <div class="videovoiceList">
+                    <div class="videovoiceListLine"></div>
+                    <div class="videovoiceListBtn"></div>
+                  </div>
+                </div>
               </template>
               <svg
+                style="cursor: pointer"
                 class="fnot"
                 fill="white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +144,7 @@ onMounted(() => {
             </TagHover>
             <TagHover>
               <template #tag>
-                <div class="videovoice"></div>
+                <div class="videosetting"></div>
               </template>
 
               <svg
@@ -166,6 +173,7 @@ onMounted(() => {
               />
             </svg>
             <svg
+              v-show="isWebIconFlag"
               class="fnot"
               fill="white"
               xmlns="http://www.w3.org/2000/svg"

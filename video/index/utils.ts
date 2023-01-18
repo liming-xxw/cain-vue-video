@@ -4,7 +4,7 @@
  * @Author: cain
  * @Date: 2022-12-06 17:42:30
  * @LastEditors: Andy
- * @LastEditTime: 2022-12-16 15:54:31
+ * @LastEditTime: 2023-01-18 11:47:04
  * @FilePath: \cain-video\video\index\utils.ts
  */
 import { ref, nextTick, reactive, toRefs } from "vue";
@@ -25,12 +25,14 @@ export const m3u8_video = ref<HTMLVideoElement>();
 export const useState = reactive<{
   isPlay: boolean;
   isWebFullScreen: boolean;
+  isWebIconFlag: Boolean;
   isHover: boolean;
   isProgHover: boolean;
   isbrowserFullScreen: boolean;
   isPicture: boolean;
 }>({
   isPlay: true,
+  isWebIconFlag: true,
   isWebFullScreen: false,
   isHover: false,
   isProgHover: false,
@@ -55,6 +57,7 @@ export const {
   isProgHover,
   isbrowserFullScreen,
   isPicture,
+  isWebIconFlag,
 } = toRefs(useState);
 
 export const VideoLoad = async (ref: HTMLVideoElement, option: VideoOption) => {

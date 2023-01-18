@@ -1,64 +1,96 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: cain
+ * @Date: 2022-12-16 16:03:51
+ * @LastEditors: Andy
+ * @LastEditTime: 2023-01-18 10:55:40
+ * @FilePath: \cain-video\video\Taghover\TagHover.vue
+-->
 <script lang="ts" setup>
-import { onMounted, ref, toRefs, useSlots } from "vue";
+import { nextTick, onMounted, ref, toRefs, useSlots, watch } from "vue";
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
   },
+  top: {
+    type: Number,
+    default: 0,
+  },
+  left: {
+    type: Number,
+    default: 0,
+  },
 });
 const VideoHover = ref<boolean>(false);
+const VideoFlagHover = ref<boolean>(true);
 const slots = useSlots();
 const defaultSlot = slots.default && slots.default()[0];
-const { modelValue } = toRefs(props);
+const { modelValue, top, left } = toRefs(props);
 
 const DomRef = ref<HTMLDivElement>();
 const HoverRef = ref<HTMLDivElement>();
 
 onMounted(() => {
-  console.log();
-  let left = Number(DomRef.value?.offsetLeft);
-  let top =
-    Number(DomRef.value?.offsetTop) - Number(DomRef.value?.clientHeight) * 3;
-  (HoverRef.value as any).style.left = left + "px";
-  (HoverRef.value as any).style.top = top + "px";
+  (HoverRef.value as any).style.left = left.value + "px";
+  (HoverRef.value as any).style.top = top.value + "px";
 });
 
+watch(
+  () => DomRef.value?.offsetLeft,
+  (old) => {
+    console.log(old);
+  }
+);
+
 const VideoiconMousemove = () => {
+  nextTick;
+  console.log(HoverRef.value?.offsetLeft + "xx");
+
   VideoHover.value = true;
-  console.log(VideoHover.value);
+  VideoFlagHover.value = false;
 };
 
 const VideoiconMouseout = () => {
+  VideoFlagHover.value = true;
   setTimeout(() => {
-    VideoHover.value = false;
-    console.log("xxx");
-  }, 100);
+    if (VideoFlagHover.value) VideoHover.value = false;
+  }, 400);
 };
 
 const xxx = () => {
   VideoHover.value = true;
-  console.log(VideoHover.value);
+  VideoFlagHover.value = false;
 };
 </script>
 
 <template>
-  <Transition>
+  <div style="position: relative">
+    <Transition>
+      <div
+        class="TagHover"
+        @mousemove="xxx"
+        @mouseout="VideoiconMouseout"
+        ref="HoverRef"
+        v-show="VideoHover"
+      >
+        <slot name="tag"> </slot>
+        <div
+          class="ModelTop"
+          @mousemove="VideoiconMousemove"
+          @mouseout="VideoiconMouseout"
+        ></div>
+      </div>
+    </Transition>
+
     <div
-      class="TagHover"
-      @mousemove="xxx"
+      ref="DomRef"
+      @mousemove="VideoiconMousemove"
       @mouseout="VideoiconMouseout"
-      ref="HoverRef"
-      v-show="VideoHover"
     >
-      <slot name="tag"> </slot>
+      <slot></slot>
     </div>
-  </Transition>
-  <div
-    ref="DomRef"
-    @mousemove="VideoiconMousemove"
-    @mouseout="VideoiconMouseout"
-  >
-    <slot></slot>
   </div>
 </template>
